@@ -9,7 +9,6 @@ html, body {
 }
 
 #chat {
-  max-width: 800px;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -38,7 +37,7 @@ button {
 }
 
 .messages {
-  width: 100%;
+  width: 600px;
   height: 400px;
   margin: 20px 0;
   border: 1px solid #ddd;
