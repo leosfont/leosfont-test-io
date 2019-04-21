@@ -14,11 +14,11 @@ app.use('/', (req, res) => {
 	res.render('index.html');
 });
 
+let roms = [];
 let messages = [];
 
 io.on('connection', socket => {
 	console.log(`Socket conectado: ${socket.id}`);
-    
     
     socket.emit('previousMessages', messages);
 
@@ -31,4 +31,4 @@ io.on('connection', socket => {
 	
 });
 
-server.listen(3000);
+server.listen(process.env.PORT || 3333);
