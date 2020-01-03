@@ -1,0 +1,71 @@
+{ 
+    "level" : 1,
+    "hp": 500,
+    "mp": 100,
+    "shield": 0,
+    "damage" : 50,
+    "spellpower" : 0,
+    "position" : {
+        "x": 0,
+        "y": 0
+    },
+    "skills" : {
+        "0" : {
+            "name" : "Attack",
+            "cost" : 0,
+            "target" : "One",
+            "cooldown" : 1,
+            "last": 0,
+            "effs" : {
+                "damage" : {
+                    "value" : "damage"
+                }
+            }
+        },
+        "1" : {
+            "name" : "Fire",       
+            "cost" : 20,
+            "target" : "One",
+            "cooldown" : 4,
+            "last": 0,
+            "effs" : {
+                "damage" : {
+                    "value" : 80
+                }
+            }
+        },
+        "2" : {
+            "name" : "Heal",
+            "cost" : 30,
+            "target" : "One",
+            "cooldown" : 8,
+            "effs" : {
+                "heal" : {
+                    "value" : 120
+                }
+            }
+        },
+        "3" : {
+            "name" : "Shield",
+            "cost" : 20,
+            "target" : "You",
+            "cooldown" : 6,
+            "effs" : {
+                "shield" : {
+                    "value" : 80
+                }
+            }
+        },
+        "4" : {
+            "name" : "Explosion",
+            "cost" : 80,
+            "target" : "All",
+            "cooldown" : 22,
+            "effs" : {
+                "damage" : {
+                    "value" : 200
+                }
+            }
+        }
+    }
+}
