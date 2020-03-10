@@ -15,6 +15,10 @@ app.use('/', (req, res) => {
 	res.render('index.html');
 });
 
+app.use('/', (req, res) => {
+	res.render('index.html');
+});
+
 let users = [];
 let messages = [];
 let status = JSON.parse(fs.readFileSync('./data/status.json'));
