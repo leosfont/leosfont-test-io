@@ -15,13 +15,9 @@ app.use('/', (req, res) => {
 	res.render('index.html');
 });
 
-app.use('/', (req, res) => {
-	res.render('index.html');
-});
-
 let users = [];
 let messages = [];
-let status = JSON.parse(fs.readFileSync('./data/status.json'));
+let roms = [];
 
 io.on('connection', socket => {
 	console.log(`Socket conectado: ${socket.id}`);
@@ -34,7 +30,7 @@ io.on('connection', socket => {
 			user = {
 				socketID : socket.id,
 				name,
-				status,
+				room: null,
 			}
 	
 			users.push(user);
@@ -62,12 +58,26 @@ io.on('connection', socket => {
 		const user = findBySocketID(socket.id);
 		var messageObject = {
 			name : user.name,
+			user_id : user.id,
+			friend_id : message.friend_id,
 			message,
 		}
 		messages.push(messageObject);
 		socket.broadcast.emit('receivedMessage', messageObject);
 
 		console.log('Messages:', messages)
+	});
+
+	socket.on('loadRoom', friend => {
+		const user = findBySocketID(socket.id);
+		socket.emit('previusMessages', messages);
+		socket.join(socket.id);
+
+		var roomObject = {
+			id : socket.id,
+		}
+
+		socket.broadcast.emit('receivedRoom', roomObject);
 	});
 
 	//private functions

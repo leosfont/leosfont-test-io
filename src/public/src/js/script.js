@@ -6,7 +6,6 @@ var app = new Vue({
         user: [],
         users: [],
         messages: [],
-        router: 'register',
         registerName: '',
         message: '',
     },
@@ -19,6 +18,7 @@ var app = new Vue({
         },
         renderUser: function (user) {
             this.users.push(user); 
+            console.log('this.users', this.users);
         },
         renderMessage: function (message) {
             this.messages.push(message); 
@@ -45,9 +45,8 @@ var app = new Vue({
 
 socket.on('successRegister', (user) => {
     app.user = user;
-    app.router = 'chat';
     app.renderUser(user);
-    console.log(user);
+    console.log('successRegister', user);
 });
 
 socket.on('previousUsers', (users) => {

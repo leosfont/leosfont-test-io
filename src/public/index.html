@@ -5,49 +5,51 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+	
+	<script src="./src/js/socket.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="./src/css/styles.css">
 </head>
 
 <body>
-	<div id="app">
-		<div id="register" v-if="router == 'register'">
-			<h2>Register</h2>
-			<input type="text" name="name" v-model="registerName" placeholder="Digite seu usuário">
-			<br />
-			<button type="submit" v-on:click="register">Entrar</button>
+	<div id="app" class="h-c100vh max-w-280 m-a d-f fd-c ai-c jc-c">
+		<div id="register" v-if="!user.name">
+			<h3>Register</h3>
+			<input class="mb-10 d-b ta-c"  type="text" name="name" v-model="registerName" placeholder="Digite seu usuário">
+			<button class="btn" type="submit" v-on:click="register">Entrar</button>
 		</div>
 		
-		<div id="users" v-if="router == 'chat'">
-			<div class="users">
-				<div class="user" v-for="user in users">
-					<p><b>User:</b>{{ user.name }}</p>
+		<div id="users" class="d-b w-100" v-if="user.name && user.room == null">
+			<div class="users d-b w-100">
+				<div class="user d-f fd-c jc-sb ai-c ac-c w-100">
+					<div 
+						v-for="u in users" 
+						class="col-12 cb c-w mb-20 p-20 br-30 b-b ml-5 mr-5 ta-c w-100"
+					>
+						<p>{{ u.name }}</p>
+					</div>
 				</div>
-			</div>
-			<div class="skills">
-				<div class="skill" v-for="skill in user.status.skills"></div>
+				<div class="user d-b w-100 jc-sb ai-c ac-c" v-if="users.length <= 1">
+					<p>Aguardando a entrada de usuários...</p>
+				</div>
 			</div>
 		</div>
 
-		<div id="chat" v-if="router == 'chat'">
-			<h2>Chat</h2>
+		<div id="chat" v-if="user.name && user.room != null">
+			<h3>Chat</h3>
 			
-			<div class="messages">
-				<p v-for="message in messages">
-					<strong>{{ message.name }}:</strong><br>
-					{{ message.message }}
+			<div class="messages mb-20 d-b">
+				<p v-for="message in messages" class="mb-10 d-b">
+					<strong class="d-b">{{ message.name }}:</strong>
+					<span>{{ message.message }}</span>
 				</p>
 			</div>
-			<textarea type="text" name="message" v-model="message" placeholder="Digite sua mensagem"></textarea>
-			<br />
-			<button type="submit" v-on:click="sendMessage">Enviar</button>
+			<textarea class="ta-c mb-10 d-b" type="text" name="message" v-model="message" placeholder="Digite sua mensagem"></textarea>
+			<button class="btn" type="submit" v-on:click="sendMessage">Enviar</button>
 		</div>
 	</div>
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="./src/js/vue.js"></script>
 <script src="./src/js/script.js"></script>
 </html>
